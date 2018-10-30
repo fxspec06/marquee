@@ -1,13 +1,106 @@
-<!doctype html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>IPAddress</title>
-  <base href="https://fxspec06.github.io/IP-address/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="stylesheet" href="styles.34c57ab7888ec1573f9c.css"></head>
-<body>
-  <app-root></app-root>
-<script type="text/javascript" src="runtime.a66f828dca56eeb90e02.js"></script><script type="text/javascript" src="polyfills.2f4a59095805af02bd79.js"></script><script type="text/javascript" src="main.91efa316b64694236b37.js"></script></body>
+	<title>I made this in like a half hour | now an hour</title>
+	<style>
+		body {
+			background-color: #001122;
+			color: #FFCC00;
+			text-align: center;
+		}
+		.marq {
+			position: fixed;
+		}
+	</style>
+	
+	<script>
+		marqNum = 0;
+		
+		function generateMarquee() {
+			marqNum++;
+			var newDiv = document.createElement("div");
+			newDiv.setAttribute("id", "marq" + marqNum);
+			newDiv.setAttribute("class", "marq");
+			var node = document.createTextNode("LORI IS AWESOME");
+			console.log(newDiv);
+			console.log(node);
+			newDiv.appendChild(node);
+			document.body.appendChild(newDiv);
+			return document.getElementById("marq" + marqNum);
+		}
+		
+		function marq() {
+			alert("<3");
+			
+			wordLength = 50;
+			
+			leftBound = -wordLength;
+			
+			newMarq();
+			newMarq();
+			newMarq();
+			newMarq();
+			newMarq();
+			newMarq();
+			newMarq();
+			newMarq();
+			newMarq();
+		}
+		
+		function newMarq() {
+			
+			$ = generateMarquee();
+			
+			randomStyle($);
+			
+			speed = Math.floor(Math.random() * 35);
+			
+			if (Math.floor(Math.random() * 2) == 1) moveLeft($, speed);
+			else moveRight($, speed);
+		}
+		
+		function timer(el) {
+			window.setTimeout(timer.bind(this, el), 20, el);
+			moveRight(el);
+		}
+
+		function moveRight(el, speed) {
+			el.style.left = ( parseInt(el.style.left) + 5 ) + "px";
+			if (parseInt(el.style.left) > window.innerWidth + wordLength) resetRight(el);
+			window.setTimeout(moveRight.bind(this, el, speed), speed, el, speed);
+		}
+		
+		function moveLeft(el, speed) {
+			el.style.left = ( parseInt(el.style.left) - 5 ) + "px";
+			if (parseInt(el.style.left) < leftBound) resetLeft(el);
+			window.setTimeout(moveLeft.bind(this, el, speed), speed, el, speed);
+		}
+
+		function resetRight(el) {
+			randomStyle(el);
+			el.style.left = leftBound + "px";
+		}
+
+		function resetLeft(el) {
+			randomStyle(el);
+			el.style.left = window.innerWidth - wordLength + "px";
+		}
+
+		function randomStyle(el) {
+			textSizes = [12,16,24,36,48,60,72];
+			textSize = Math.floor(Math.random() * textSizes.length);
+			console.log(textSizes[textSize] + "px")
+			el.style.fontSize = textSizes[textSize] + "px";
+			
+			red = Math.floor(Math.random() * 255);
+			green = Math.floor(Math.random() * 255);
+			blue = Math.floor(Math.random() * 255);
+			
+			el.style.color = "rgb(" + red + ", " + green + ", " + blue + ")";
+			
+			el.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+			el.style.top = Math.floor(Math.random() * window.innerHeight) + "px";
+		}
+	</script>
+</head>
+<body onload="marq()"></body>
 </html>
